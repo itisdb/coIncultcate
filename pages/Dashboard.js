@@ -14,10 +14,10 @@ const Dashboard = ({ address }) => {
     const getCoins = async () => {
       try {
         const coins = await fetch(
-          'https://u5i352de.api.sanity.io/v1/data/query/production?query=*%5B_type%20%3D%3D%20%27coins%27%5D%20%7B%0A%20%20name%2C%0A%20%20symbol%2C%0A%20%20contractAddress%2C%0A%20%20logo%2C%0A%20%20usdPrice%0A%7D',
+          'https://81ga09bo.api.sanity.io/v2021-10-21/data/query/production?query=*%5B_type%3D%3D%27coins%27%5D%7B%0A%20%20name%2C%0A%20%20usdPrice%2C%0A%20%20contractAddress%2C%0A%20%20symbol%2C%0A%20%20logo%0A%7D',
         )
         const tempSanityTokens = await coins.json()
-
+        console.log(tempSanityTokens)
         setSanityTokens(tempSanityTokens.result)
       } catch (error) {
         console.error(error)
@@ -31,8 +31,8 @@ const Dashboard = ({ address }) => {
     if (sanityTokens) {
       const sdk = new ThirdwebSDK(
         new ethers.Wallet(
-          process.env.NEXT_PUBLIC_PRIVATE_KEY,
-          ethers.getDefaultProvider('https://rpc-mumbai.maticvigil.com'),
+          process.env.NEXT_PUBLIC_METAMASK_KEY,
+          ethers.getDefaultProvider('https://goerli.infura.io/v3/68b503e2dab14a51aecb4dfedb3cc37a'),
         ),
       )
 
